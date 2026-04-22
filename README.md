@@ -1,6 +1,6 @@
 # WhatsApp AI Bot
 
-Bot WhatsApp yang berfungsi sebagai asisten auto-reply berbasis AI. Kalau kamu lagi sibuk, tidak bisa balas pesan, atau butuh istirahat — aktifkan bot ini dan biarkan AI yang membalas pesan masuk atas namamu.
+Bot WhatsApp yang berfungsi sebagai asisten autoreply berbasis AI. Kalau kamu lagi sibuk, tidak bisa balas pesan, atau butuh istirahat aktifkan bot ini dan biarkan AI yang membalas pesan masuk atas namamu.
 
 ## Fitur
 
@@ -13,16 +13,16 @@ Bot WhatsApp yang berfungsi sebagai asisten auto-reply berbasis AI. Kalau kamu l
 
 ## Perintah
 
-| Perintah | Keterangan |
-|---|---|
-| `!help` | Tampilkan semua perintah yang tersedia |
-| `!whoami` | Cek WhatsApp ID dan status admin kamu |
-| `!setstatus <kondisi>` | Aktifkan mode AI dengan status tertentu |
-| `!offai` | Matikan mode AI |
-| `!addnomor <nomor>` | Tambahkan nomor ke whitelist AI |
-| `!addnomor hapus <nomor>` | Hapus nomor dari whitelist |
-| `!addnomor list` | Lihat semua nomor yang terdaftar |
-| `!status` | Tampilkan metrik performa bot |
+| Perintah                  | Keterangan                              |
+| ------------------------- | --------------------------------------- |
+| `!help`                   | Tampilkan semua perintah yang tersedia  |
+| `!whoami`                 | Cek WhatsApp ID dan status admin kamu   |
+| `!setstatus <kondisi>`    | Aktifkan mode AI dengan status tertentu |
+| `!offai`                  | Matikan mode AI                         |
+| `!addnomor <nomor>`       | Tambahkan nomor ke whitelist AI         |
+| `!addnomor hapus <nomor>` | Hapus nomor dari whitelist              |
+| `!addnomor list`          | Lihat semua nomor yang terdaftar        |
+| `!status`                 | Tampilkan metrik performa bot           |
 
 > Perintah khusus admin: `setstatus`, `offai`, `addnomor`, `status`
 
@@ -115,7 +115,3 @@ src/
     ├── helpers.js              # Info pengirim, cek admin
     └── logger.js               # Winston logger
 ```
-
-## Lisensi
-
-MIT
