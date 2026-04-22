@@ -115,3 +115,7 @@ src/
     ├── helpers.js              # Info pengirim, cek admin
     └── logger.js               # Winston logger
 ```
+
+## Screenshot
+
+<img width="959" height="457" alt="Image" src="https://github.com/user-attachments/assets/76a31e71-5643-42b8-ab29-66463e8c0226" />
