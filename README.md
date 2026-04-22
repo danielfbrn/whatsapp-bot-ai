@@ -7,7 +7,7 @@ Bot WhatsApp yang berfungsi sebagai asisten autoreply berbasis AI. Kalau kamu la
 - **AI Auto-reply** — Didukung Groq (Llama 3.1), membalas pesan dari kontak yang sudah didaftarkan saat kamu tidak aktif
 - **Persona kustom** — Atur status (misal: "tidur", "rapat") dan AI akan menyesuaikan balasannya
 - **Whitelist kontak** — Hanya nomor tertentu yang mendapat balasan AI, bukan semua orang
-- **Memori percakapan** — Menyimpan konteks setiap percakapan (hingga 20 pesan per kontak)
+- **Memori percakapan** — Menyimpan konteks setiap percakapan
 - **Sistem perintah** — Kelola semua fitur lewat perintah WhatsApp dengan proteksi admin
 - **Monitoring status** — Cek uptime, penggunaan memori, dan CPU bot lewat perintah
 
@@ -32,7 +32,7 @@ Bot WhatsApp yang berfungsi sebagai asisten autoreply berbasis AI. Kalau kamu la
 - **WhatsApp** — [@wppconnect-team/wppconnect](https://github.com/wppconnect-team/wppconnect)
 - **AI** — [Groq API](https://groq.com) (llama-3.1-8b-instant)
 - **Logging** — Winston
-- **Process manager** — PM2 (disarankan untuk production)
+- **Process manager** — PM2
 
 ## Cara Penggunaan
 
@@ -118,6 +118,6 @@ src/
 
 ## Screenshot
 
-<img width="400" height="457" alt="Image" src="https://github.com/user-attachments/assets/76a31e71-5643-42b8-ab29-66463e8c0226" />
+![Image](https://github.com/user-attachments/assets/76a31e71-5643-42b8-ab29-66463e8c0226)
 
-<img width="400" height="635" alt="Image" src="https://github.com/user-attachments/assets/6988739a-bf8f-4ce3-bbd2-5502d0794b06" />
+![Image](https://github.com/user-attachments/assets/6988739a-bf8f-4ce3-bbd2-5502d0794b06)
