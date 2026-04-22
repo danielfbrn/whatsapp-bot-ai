@@ -1,0 +1,22 @@
+{
+  "name": "whatsapp-bot-ai",
+  "version": "1.0.0",
+  "description": "WhatsApp AI Assistant Bot",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "@wppconnect-team/wppconnect": "^1.30.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
