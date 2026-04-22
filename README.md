@@ -119,3 +119,4 @@ src/
 ## Screenshot
 
 <img width="959" height="457" alt="Image" src="https://github.com/user-attachments/assets/76a31e71-5643-42b8-ab29-66463e8c0226" />
+<img width="1180" height="635" alt="Image" src="https://github.com/user-attachments/assets/6988739a-bf8f-4ce3-bbd2-5502d0794b06" />
