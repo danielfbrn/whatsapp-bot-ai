@@ -1,30 +1,30 @@
 # WhatsApp AI Bot
 
-A WhatsApp bot that acts as an AI-powered auto-reply assistant. When you're busy, unavailable, or just want a break — activate it and it handles incoming messages on your behalf using a conversational AI that speaks in your style.
+Bot WhatsApp yang berfungsi sebagai asisten auto-reply berbasis AI. Kalau kamu lagi sibuk, tidak bisa balas pesan, atau butuh istirahat — aktifkan bot ini dan biarkan AI yang membalas pesan masuk atas namamu.
 
-## Features
+## Fitur
 
-- **AI Auto-reply** — Powered by Groq (Llama 3.1), replies to whitelisted contacts when you're away
-- **Custom persona** — Set a status (e.g. "sleeping", "in a meeting") and the AI adapts its replies accordingly
-- **Contact whitelist** — Only specific numbers get AI replies, not everyone
-- **Conversation memory** — Keeps context of each conversation (up to 20 messages per contact)
-- **Command system** — Manage everything via WhatsApp commands with admin protection
-- **Status monitoring** — Check bot uptime, memory, and CPU usage via command
+- **AI Auto-reply** — Didukung Groq (Llama 3.1), membalas pesan dari kontak yang sudah didaftarkan saat kamu tidak aktif
+- **Persona kustom** — Atur status (misal: "tidur", "rapat") dan AI akan menyesuaikan balasannya
+- **Whitelist kontak** — Hanya nomor tertentu yang mendapat balasan AI, bukan semua orang
+- **Memori percakapan** — Menyimpan konteks setiap percakapan (hingga 20 pesan per kontak)
+- **Sistem perintah** — Kelola semua fitur lewat perintah WhatsApp dengan proteksi admin
+- **Monitoring status** — Cek uptime, penggunaan memori, dan CPU bot lewat perintah
 
-## Commands
+## Perintah
 
-| Command | Description |
+| Perintah | Keterangan |
 |---|---|
-| `!help` | Show all available commands |
-| `!whoami` | Check your WhatsApp ID and admin status |
-| `!setstatus <condition>` | Activate AI mode with a custom status |
-| `!offai` | Deactivate AI mode |
-| `!addnomor <number>` | Add a number to the AI whitelist |
-| `!addnomor hapus <number>` | Remove a number from the whitelist |
-| `!addnomor list` | View all whitelisted numbers |
-| `!status` | Show bot performance metrics |
+| `!help` | Tampilkan semua perintah yang tersedia |
+| `!whoami` | Cek WhatsApp ID dan status admin kamu |
+| `!setstatus <kondisi>` | Aktifkan mode AI dengan status tertentu |
+| `!offai` | Matikan mode AI |
+| `!addnomor <nomor>` | Tambahkan nomor ke whitelist AI |
+| `!addnomor hapus <nomor>` | Hapus nomor dari whitelist |
+| `!addnomor list` | Lihat semua nomor yang terdaftar |
+| `!status` | Tampilkan metrik performa bot |
 
-> Admin-only commands: `setstatus`, `offai`, `addnomor`, `status`
+> Perintah khusus admin: `setstatus`, `offai`, `addnomor`, `status`
 
 ## Tech Stack
 
@@ -32,25 +32,25 @@ A WhatsApp bot that acts as an AI-powered auto-reply assistant. When you're busy
 - **WhatsApp** — [@wppconnect-team/wppconnect](https://github.com/wppconnect-team/wppconnect)
 - **AI** — [Groq API](https://groq.com) (llama-3.1-8b-instant)
 - **Logging** — Winston
-- **Process manager** — PM2 (recommended for production)
+- **Process manager** — PM2 (disarankan untuk production)
 
-## Setup
+## Cara Penggunaan
 
 ### 1. Clone & install
 
 ```bash
-git clone https://github.com/your-username/whatsapp-bot-ai.git
+git clone https://github.com/danielfbrn/whatsapp-bot-ai.git
 cd whatsapp-bot-ai
 npm install
 ```
 
-### 2. Configure environment
+### 2. Konfigurasi environment
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your values:
+Edit file `.env` sesuai kebutuhanmu:
 
 ```env
 AI_BOT_NAME=RyanBot
@@ -64,9 +64,9 @@ AI_OWNER_LANGUAGE=Bahasa Indonesia
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-Get a free Groq API key at [console.groq.com](https://console.groq.com).
+Dapatkan Groq API key gratis di [console.groq.com](https://console.groq.com).
 
-### 3. Run
+### 3. Jalankan bot
 
 ```bash
 # Development
@@ -75,47 +75,47 @@ npm run dev
 # Production
 npm start
 
-# With PM2
+# Dengan PM2
 pm2 start src/index.js --name whatsapp-bot-ai
 pm2 save
 ```
 
 ### 4. Scan QR code
 
-On first run, a QR code will appear in the terminal. Scan it with WhatsApp on your phone. The session is saved locally so you only need to scan once.
+Saat pertama kali dijalankan, QR code akan muncul di terminal. Scan menggunakan WhatsApp di HP kamu. Sesi akan tersimpan secara lokal sehingga kamu hanya perlu scan sekali.
 
-## Usage
+## Cara Pakai
 
-1. Send `!setstatus tidur` to activate AI mode (replace "tidur" with your actual status)
-2. Add contacts that should receive AI replies: `!addnomor 08123456789`
-3. When someone messages you, the bot replies automatically on your behalf
-4. Send `!offai` to deactivate when you're back
+1. Kirim `!setstatus tidur` untuk mengaktifkan mode AI (ganti "tidur" dengan kondisi kamu)
+2. Tambahkan kontak yang ingin dilayani AI: `!addnomor 08123456789`
+3. Saat ada yang mengirim pesan, bot akan membalas otomatis atas namamu
+4. Kirim `!offai` untuk mematikan mode AI saat kamu sudah aktif kembali
 
-## Project Structure
+## Struktur Project
 
 ```
 src/
 ├── index.js                    # Entry point
-├── config.js                   # App config from env
+├── config.js                   # Konfigurasi dari env
 ├── handlers/
-│   ├── messageHandler.js       # Routes messages to commands or AI
+│   ├── messageHandler.js       # Routing pesan ke command atau AI
 │   └── commands/
-│       └── index.js            # Command definitions
+│       └── index.js            # Definisi semua perintah
 ├── commands/
-│   └── statusCommand.js        # Bot status metrics
+│   └── statusCommand.js        # Metrik performa bot
 ├── services/
-│   ├── registry.js             # Command registry
+│   ├── registry.js             # Registry perintah
 │   └── ai/
 │       ├── groqClient.js       # Groq API client + system prompt
-│       ├── aiState.js          # Active/inactive state + whitelist
-│       └── conversationHistory.js  # Per-contact message history
+│       ├── aiState.js          # State aktif/nonaktif + whitelist
+│       └── conversationHistory.js  # Riwayat percakapan per kontak
 ├── middleware/
-│   └── messageFilter.js        # Filter out system/irrelevant messages
+│   └── messageFilter.js        # Filter pesan sistem/tidak relevan
 └── utils/
-    ├── helpers.js              # Sender info, admin check
+    ├── helpers.js              # Info pengirim, cek admin
     └── logger.js               # Winston logger
 ```
 
-## License
+## Lisensi
 
 MIT
