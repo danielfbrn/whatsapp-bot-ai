@@ -2,8 +2,9 @@ const axios = require('axios');
 
 const getImageBase64 = async (client, message) => {
   if (message.type === 'image') return await client.downloadMedia(message);
-  const quoted = message.quotedMsg || message.quotedMsgObj;
-  if (quoted?.type === 'image') return await client.downloadMedia(quoted);
+    if (message.quotedMsg?.type === 'image' && message.quotedMsg?.id) {
+    return await client.downloadMedia(message.quotedMsg);
+  }
   return null;
 };
 
