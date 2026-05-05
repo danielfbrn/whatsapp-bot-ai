@@ -1,9 +1,23 @@
 const axios = require('axios');
 
+const _imageCache = new Map();
+const CACHE_TTL = 30_000;
+
+const onImageMessage = (message) => {
+  if (message.fromMe || message.type !== 'image' || !message.body) return;
+  const base64 = message.body.startsWith('data:') ? message.body : `data:image/jpeg;base64,${message.body}`;
+  _imageCache.set(message.chatId, { base64, at: Date.now() });
+};
+
 const getImageBase64 = async (client, message) => {
   if (message.type === 'image') return await client.downloadMedia(message);
-    if (message.quotedMsg?.type === 'image' && message.quotedMsg?.id) {
+  if (message.quotedMsg?.type === 'image' && message.quotedMsg?.id) {
     return await client.downloadMedia(message.quotedMsg);
+  }
+  const cached = _imageCache.get(message.chatId);
+  if (cached && Date.now() - cached.at <= CACHE_TTL) {
+    _imageCache.delete(message.chatId);
+    return cached.base64;
   }
   return null;
 };
@@ -32,7 +46,7 @@ const registerStickerCommand = (registry) => {
 
     if (!base64) {
       await client.sendText(message.from,
-        `🖼️ Cara pakai:\n• Kirim gambar dengan caption *!sticker*\n• Reply gambar dengan *!sticker*\n• Hapus background: *!sticker nobg*`
+        `🖼️ Cara pakai:\n• Kirim gambar lalu ketik *!sticker*\n• Atau kirim gambar dengan caption *!sticker*\n• Untuk hapus background: *!sticker nobg*`
       );
       return;
     }
@@ -60,4 +74,4 @@ const registerStickerCommand = (registry) => {
   });
 };
 
-module.exports = { registerStickerCommand };
+module.exports = { registerStickerCommand, onImageMessage };

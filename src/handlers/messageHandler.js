@@ -6,6 +6,7 @@ const { chat } = require('../services/ai/groqClient');
 const { createLogger } = require('../utils/logger');
 const registry = require('../services/registry');
 const config   = require('../config');
+const { onImageMessage } = require('../commands/stickerCommand');
 
 const logger = createLogger(config.name);
 
@@ -79,6 +80,8 @@ const handleAiReply = async (client, message) => {
 const onMessage = async (client, message) => {
   if (!shouldProcessMessage(message)) return;
   logMessage(message, logger);
+
+  if (message.type === 'image') onImageMessage(message);
 
   if (await handleCommand(client, message)) return;
   await handleAiReply(client, message);
