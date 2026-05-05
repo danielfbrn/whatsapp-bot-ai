@@ -2,7 +2,8 @@ const axios = require('axios');
 
 const getImageBase64 = async (client, message) => {
   if (message.type === 'image') return await client.downloadMedia(message);
-  if (message.quotedMsg?.type === 'image') return await client.downloadMedia(message.quotedMsg);
+  const quoted = message.quotedMsg || message.quotedMsgObj;
+  if (quoted?.type === 'image') return await client.downloadMedia(quoted);
   return null;
 };
 
@@ -19,7 +20,14 @@ const removeBackground = async (base64, apiKey) => {
 const registerStickerCommand = (registry) => {
   const handler = async (client, message, args) => {
     const nobg = args[0]?.toLowerCase() === 'nobg';
-    const base64 = await getImageBase64(client, message);
+
+    let base64;
+    try {
+      base64 = await getImageBase64(client, message);
+    } catch {
+      await client.sendText(message.from, '❌ Gagal mengambil gambar. Coba kirim ulang gambarnya.');
+      return;
+    }
 
     if (!base64) {
       await client.sendText(message.from,
