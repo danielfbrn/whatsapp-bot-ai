@@ -36,4 +36,6 @@ const clearHistory = (waId) => {
   saveAll(all);
 };
 
-module.exports = { getHistory, appendMessage, clearHistory };
+const clearAllHistory = () => saveAll({});
+
+module.exports = { getHistory, appendMessage, clearHistory, clearAllHistory };

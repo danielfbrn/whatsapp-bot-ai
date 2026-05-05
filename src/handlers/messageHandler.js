@@ -44,6 +44,7 @@ const handleCommand = async (client, message) => {
 };
 
 const handleAiReply = async (client, message) => {
+  if (message.fromMe) return false;
   if (isGroupMessage(message)) return false;
 
   const state    = getState();

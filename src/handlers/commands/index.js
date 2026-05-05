@@ -2,6 +2,7 @@ const registry = require('../../services/registry');
 const config   = require('../../config');
 const { isAdmin, extractPhoneFromWaId } = require('../../utils/helpers');
 const { getState, activate, deactivate, addNumber, removeNumber } = require('../../services/ai/aiState');
+const { clearHistory, clearAllHistory } = require('../../services/ai/conversationHistory');
 
 const helpCommand = async (client, message, args, sender) => {
   const adminUser  = isAdmin(sender.id, config.adminNumber);
@@ -115,5 +116,26 @@ const addNomorCommand = async (client, message, args) => {
 };
 registry.register('addnomor', addNomorCommand, { description: 'Kelola nomor yang dilayani AI', usage: 'addnomor <nomor> | addnomor hapus <nomor> | addnomor list', adminOnly: true });
 
+const clearchatCommand = async (client, message, args) => {
+  if (!args.length) {
+    await client.sendText(message.from,
+      `🗑️ Gunakan:\n• *!clearchat <nomor>* — hapus memori 1 kontak\n• *!clearchat semua* — hapus semua memori AI`
+    ); return;
+  }
+  if (args[0].toLowerCase() === 'semua') {
+    clearAllHistory();
+    await client.sendText(message.from, '🗑️ Semua riwayat percakapan AI berhasil dihapus.'); return;
+  }
+  const waId = normalizeToWaId(args.join(''));
+  clearHistory(waId);
+  await client.sendText(message.from,
+    `🗑️ Riwayat percakapan *${extractPhoneFromWaId(waId)}* berhasil dihapus.`
+  );
+};
+registry.register('clearchat', clearchatCommand, { description: 'Hapus riwayat percakapan AI', usage: 'clearchat <nomor> | clearchat semua', adminOnly: true });
+
 const { registerStatusCommand } = require('../../commands/statusCommand');
 registerStatusCommand(registry, config);
+
+const { registerStickerCommand } = require('../../commands/stickerCommand');
+registerStickerCommand(registry);
