@@ -77,13 +77,32 @@ const start = async () => {
     try { await client.getConnectionState(); } catch {}
   }, 55 * 1000);
 
+  let disconnectTimer = null;
+
   client.onStateChange((state) => {
     logger.info(`State: ${state}`);
     if (state === 'CONFLICT') client.useHere().catch(() => {});
+    if (state === 'CONNECTED' && disconnectTimer) {
+      clearTimeout(disconnectTimer);
+      disconnectTimer = null;
+      logger.info('Reconnected');
+    }
   });
 
   client.onStreamChange((state) => {
-    if (state === 'DISCONNECTED') logger.warn('Stream disconnected');
+    if (state === 'DISCONNECTED') {
+      logger.warn('Stream disconnected — menunggu reconnect (2 menit)...');
+      if (!disconnectTimer) {
+        disconnectTimer = setTimeout(() => {
+          logger.error('Stream tidak reconnect dalam 2 menit — restarting...');
+          process.exit(1);
+        }, 2 * 60 * 1000);
+      }
+    } else if (state === 'CONNECTED' && disconnectTimer) {
+      clearTimeout(disconnectTimer);
+      disconnectTimer = null;
+      logger.info('Stream reconnected');
+    }
   });
 
   logger.info(`${config.name} ready!`);
