@@ -64,7 +64,7 @@ const start = async () => {
     },
     statusFind: (status, session) => {
       logger.info(`[${session}] ${status}`);
-      if (status === 'qrReadError' || status === 'autocloseCalled') {
+      if (status === 'qrReadError' || status === 'autocloseCalled' || status === 'browserClose' || status === 'disconnectedMobile') {
         logger.warn(`Session error: ${status} — restarting in 5s...`);
         setTimeout(() => process.exit(1), 5000);
       }
